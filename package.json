@@ -1,0 +1,23 @@
+{
+  "name": "console.blog",
+  "version": "1.0.0",
+  "description": "A simple tool to run your cool frontend developer blog in console.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://vbifonixor@github.com/vbifonixor/console.blog.git"
+  },
+  "keywords": [
+    "console",
+    "blog"
+  ],
+  "author": "Mikhail <@vbifonix>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/vbifonixor/console.blog/issues"
+  },
+  "homepage": "https://github.com/vbifonixor/console.blog#readme"
+}
