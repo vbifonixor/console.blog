@@ -79,6 +79,7 @@
                     match(txt, 'header1', out);
                     match(txt, 'bold', out);
                     match(txt, 'underline', out);
+                    match(txt, 'italic', out);
                     match(txt, 'strike', out);
                     match(txt, 'color', out);
 
@@ -93,9 +94,10 @@
                     // # Header
                     txt = replace(txt, 'header1');
 
-                    // *bold* _underline_ ~strike~
+                    // *bold* =italic= _underline_ ~strike~
                     txt = replace(txt, 'bold');
                     txt = replace(txt, 'underline');
+                    txt = replace(txt, 'italic');
                     txt = replace(txt, 'strike');
 
                     //    * list bullets
@@ -200,8 +202,14 @@
                 start: 'font-weight:bold;font-size:1.3em;',
                 end: 'font-weight:default;font-size:default;'
             },
+            italic: {
+                re: /(={1})(?=\S)(.*?)(\S)\1/g,
+                place: commonReplacer,
+                start: 'font-style: italic;',
+                end: 'font-style: unset;'
+            },
             underline: {
-                re: /(_{1,2})(?=\S)(.*?)(\S)\1/g,
+                re: /(_{2})(?=\S)(.*?)(\S)\1/g,
                 place: commonReplacer,
                 start: 'border-bottom:1px solid;',
                 end: 'border-bottom:default;'
@@ -297,7 +305,7 @@
 
 /* Big thanks to Andrea Giammarchi for his console.md library */
 
-console.blog = function (title, message, date) {
+console.blog = function (title, message, date, by) {
     var titleStyles = `
         font-size: 24px;
         line-height: 2;
@@ -314,22 +322,20 @@ console.blog = function (title, message, date) {
         line-height: 2;
         font-weight: 300;
     `
+    var byStyles = `
+        font-size: 12px;
+        font-family: sans-serif;
+        color: #0066cc;
+        line-height: 2;
+        font-weight: 300;
+    `
     console.log("------------------------------");
     console.log(`%c${title}`, titleStyles);
     if (date) {
         console.log(`%c${date}`, dateStyles);
     }
+    if (by) {
+        console.log(`by %c${by}`, byStyles);
+    }
     console.log(`${message}`);
-    console.log("------------------------------");
 }
-
-console.blog('Hello world', `Сегодня **наткнулся** на довольно удачное архитектурное решение: сделать electron-приложение (и полунативное для мобильных платформ) и хранить все их данные в файлах на дропбоксе. И ни сервера делать не нужно, ни над запросами запариваться. Знай себе данные десериализуй.
-
-# I feel totally cool here!
-Will the real Slim Shady please stand up?. I repeat, will the real Slim Shady please stand up?. We're gonna have a problem here. Y'all act like you never seen a white person before. Jaws all on the floor like Pam like Tommy just burst in the door. And started whoopin' her ass worse than before.
-So bad, I’m so good that I’m so bad. Guarantee I’ll be the greatest thing you ever had. ‘Cause you ain't never met nobody like me. And you ain't gonna wanna fuck nobody else again. I'ma make you learn to appreciate me, differentiate me. From these phony, little fishy and sissy fake G’s. Skip over the "huggy bear," and all the "kissy face," please.
-
-\`console.log('Hello World');\`
-
-So bad, I’m so good that I’m so bad. _Guarantee_ I’ll be the greatest thing you ever had. ‘Cause you ain't never met nobody like me. And you ain't gonna wanna fuck nobody else again. I'ma make you learn to appreciate me, differentiate me. From these phony, little fishy and sissy fake G’s. Skip over the "huggy bear," and all the "kissy face," please.
-`, '28th February 2018');
