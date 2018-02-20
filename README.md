@@ -1,9 +1,10 @@
 # console.blog
 
 ## Description
-A simple console-based blog helper function for your cool frontend-developer's website.
-
+A simple console-based blog helper function for your cool frontend-developer's website. Uses **Markdown-like** syntax.
 Author: Mikhail Kononenko (@vbifonixor)
+
+![Screenshot of devtools](screen.png)
 
 ## Usage
 Download `index.js` file, connect it to your HTML, then write your posts with any way you like:
